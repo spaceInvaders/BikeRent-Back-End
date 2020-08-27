@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BikeRent_Back_End.Models
 {
     public class Bicycle
     {
         public int Id { get; private set; }
-        public string Type { get; set; }
-        public string Name { get; set; }
+        [Required]
+        public string BicycleName { get; set; }
+        [Required]
+        public string BikeType { get; set; }
         public decimal Price { get; set; }
+        [Required]
         public string Status { get; set; }
     }
 }

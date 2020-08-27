@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 
 namespace BikeRent_Back_End
 {
@@ -26,6 +28,11 @@ namespace BikeRent_Back_End
             // Add services for EF Core (Inject dependency to work with Db)
             services.AddDbContext<BicyclesContext>(options => options.UseSqlServer(connectionString));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigin", builder => builder.AllowAnyOrigin());
+            });
+
             // to use controllers
             services.AddControllers();
         }
@@ -41,6 +48,8 @@ namespace BikeRent_Back_End
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
