@@ -22,13 +22,24 @@ namespace BikeRent_Back_End.Controllers
         }
 
         // GET api/bicycles
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Bicycle>>> Get()
+        [HttpGet("{status}")]
+        public async Task<ActionResult<IEnumerable<Bicycle>>> Get(string status)
         {
-            return await db.Bicycles.ToListAsync();
+            if (status == "free")
+            {
+                return await db.Bicycles.Where(bike => bike.Status == "free").ToListAsync();
+            }
+            else if (status == "isRenting")
+            {
+                return await db.Bicycles.Where(bike => bike.Status == "isRenting").ToListAsync();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        //POST - api/bicycles - saveBicycleToDb(bicycle: Bicycle) method on the client
+        //POST - api/bicycles 
         [HttpPost]
         public IActionResult Post(Bicycle bike)
         {
