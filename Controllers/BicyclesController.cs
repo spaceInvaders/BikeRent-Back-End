@@ -21,7 +21,7 @@ namespace BikeRent_Back_End.Controllers
             db = context;
         }
 
-        // GET api/bicycles
+        // GET: api/bicycles/free and api/bicycles/isRenting
         [HttpGet("{status}")]
         public async Task<ActionResult<IEnumerable<Bicycle>>> Get(string status)
         {
@@ -39,7 +39,7 @@ namespace BikeRent_Back_End.Controllers
             }
         }
 
-        //POST - api/bicycles 
+        //POST: - api/bicycles
         [HttpPost]
         public IActionResult Post(Bicycle bike)
         {
@@ -50,6 +50,7 @@ namespace BikeRent_Back_End.Controllers
 
             db.Bicycles.Add(bike);
             db.SaveChanges();
+
             return Ok(bike);
         }
     }

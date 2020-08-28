@@ -28,13 +28,19 @@ namespace BikeRent_Back_End
             // Add services for EF Core (Inject dependency to work with Db)
             services.AddDbContext<BicyclesContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigin", builder => builder.AllowAnyOrigin());
-            });
-
             // to use controllers
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigin", builder => {
+                    builder.AllowAnyOrigin();
+                    builder.WithMethods("GET", "PUT", "POST", "DELETE");
+                    builder.AllowAnyHeader();
+                });
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
