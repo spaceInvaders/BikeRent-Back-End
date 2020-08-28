@@ -21,18 +21,21 @@ namespace BikeRent_Back_End.Controllers
             db = context;
         }
 
+        private const string free = "free";
+        private const string isRenting = "isRenting";
+
         // GET: api/bicycles/free 
         // GET: api/bicycles/isRenting
         [HttpGet("{status}")]
         public async Task<ActionResult<IEnumerable<Bicycle>>> Get(string status)
         {
-            if (status == "free")
+            if (status == free)
             {
-                return await db.Bicycles.Where(bike => bike.Status == "free").ToListAsync();
+                return await db.Bicycles.Where(bike => bike.Status == free).ToListAsync();
             }
-            else if (status == "isRenting")
+            else if (status == isRenting)
             {
-                return await db.Bicycles.Where(bike => bike.Status == "isRenting").ToListAsync();
+                return await db.Bicycles.Where(bike => bike.Status == isRenting).ToListAsync();
             }
             else
             {
