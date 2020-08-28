@@ -21,7 +21,8 @@ namespace BikeRent_Back_End.Controllers
             db = context;
         }
 
-        // GET: api/bicycles/free and api/bicycles/isRenting
+        // GET: api/bicycles/free 
+        // GET: api/bicycles/isRenting
         [HttpGet("{status}")]
         public async Task<ActionResult<IEnumerable<Bicycle>>> Get(string status)
         {
@@ -39,7 +40,7 @@ namespace BikeRent_Back_End.Controllers
             }
         }
 
-        //POST: - api/bicycles
+        //POST: api/bicycles
         [HttpPost]
         public IActionResult Post(Bicycle bike)
         {
@@ -68,6 +69,22 @@ namespace BikeRent_Back_End.Controllers
             }
 
             db.Update(bike);
+            db.SaveChanges();
+
+            return Ok(bike);
+        }
+
+        // DELETE api/bicycles/10
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Bicycle bike = db.Bicycles.FirstOrDefault(bicycle => bicycle.Id == id);
+            if (bike == null)
+            {
+                return NotFound();
+            }
+
+            db.Bicycles.Remove(bike);
             db.SaveChanges();
 
             return Ok(bike);
