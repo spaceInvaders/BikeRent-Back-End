@@ -53,5 +53,24 @@ namespace BikeRent_Back_End.Controllers
 
             return Ok(bike);
         }
+
+        // PUT: api/bicycles
+        [HttpPut]
+        public IActionResult Put(Bicycle bike)
+        {
+            if (bike == null)
+            {
+                return BadRequest();
+            }
+            if (!db.Bicycles.Any(bicycle => bicycle.Id == bike.Id))
+            {
+                return NotFound();
+            }
+
+            db.Update(bike);
+            db.SaveChanges();
+
+            return Ok(bike);
+        }
     }
 }

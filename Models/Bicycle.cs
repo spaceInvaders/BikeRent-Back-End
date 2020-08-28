@@ -4,7 +4,7 @@ namespace BikeRent_Back_End.Models
 {
     public class Bicycle
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
         [Required]
         public string BicycleName { get; set; }
         [Required]

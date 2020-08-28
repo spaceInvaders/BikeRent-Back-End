@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BikeRent_Back_End.Migrations
 {
     [DbContext(typeof(BicyclesContext))]
-    [Migration("20200826211501_InitialCreate")]
+    [Migration("20200828125255_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
